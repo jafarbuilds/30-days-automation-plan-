@@ -11,7 +11,7 @@ text = f"subject: {subject}\n\n{message}"
 server=smtplib.SMTP("smtp.gmail.com",587)
 server.starttls()
 
-server.login(email,"nuywruncgluajoly")
+server.login(email,"")
 server.sendmail(email,reciever_email,text)
 
 print("Email has been sent to "+ reciever_email)
