@@ -224,3 +224,13 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Keep my contact list private
+recipients.txt
+
+# Keep my login credentials safe (if you create a .env later)
+.env
+
+# Ignore python cache files
+__pycache__/
+*.pyc
