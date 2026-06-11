@@ -1,0 +1,1 @@
+worker: python 30-days-automation-plan-/week4/day3_pt2.py
