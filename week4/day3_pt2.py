@@ -5,10 +5,8 @@ import email
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from groq import Groq
-from dotenv import load_dotenv
 import time
 
-load_dotenv()
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 MY_EMAIL = os.getenv("EMAIL")
