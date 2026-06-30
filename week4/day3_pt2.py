@@ -13,6 +13,8 @@ MY_EMAIL = os.getenv("EMAIL")
 PASSWORD = os.getenv("APP_PASSWORD")
 
 def generate_reply(customer_message):
+    import socket
+    print(socket.gethostbyname("api.groq.com"))
     response = client.chat.completions.create(
         model="llama-3.1-8b-instant",
         messages=[
