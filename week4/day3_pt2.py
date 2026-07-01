@@ -12,16 +12,36 @@ client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 MY_EMAIL = os.getenv("EMAIL")
 PASSWORD = os.getenv("APP_PASSWORD")
 
+# def generate_reply(customer_message):
+#     import socket
+#     print(socket.gethostbyname("api.groq.com"))
+#     response = client.chat.completions.create(
+#         model="llama-3.1-8b-instant",
+#         messages=[
+#             {"role": "system", "content": "You are a professional customer support agent. Reply warmly and professionally. Max 4 sentences."},
+#             {"role": "user", "content": f"A customer sent this: '{customer_message[:500]}'. Reply to them."}
+#         ]
+#     )
 def generate_reply(customer_message):
-    import socket
-    print(socket.gethostbyname("api.groq.com"))
-    response = client.chat.completions.create(
-        model="llama-3.1-8b-instant",
-        messages=[
-            {"role": "system", "content": "You are a professional customer support agent. Reply warmly and professionally. Max 4 sentences."},
-            {"role": "user", "content": f"A customer sent this: '{customer_message[:500]}'. Reply to them."}
+    import requests
+    headers = {
+        "Authorization": f"Bearer {os.getenv('GROQ_API_KEY')}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "model": "llama-3.1-8b-instant",
+        "messages": [
+            {"role": "system", "content": "You are a professional customer support agent. Reply politely and professionally. Max 4 sentences."},
+            {"role": "user", "content": f"A customer sent this: {customer_message}. Reply to them."}
         ]
+    }
+    response = requests.post(
+        "https://api.groq.com/openai/v1/chat/completions",
+        headers=headers,
+        json=data,
+        timeout=30
     )
+    return response.json()["choices"][0]["message"]["content"]
     return response.choices[0].message.content
 
 def send_reply(to_email, subject, body):
